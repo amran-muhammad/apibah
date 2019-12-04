@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Cart;
+use App\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -12,14 +13,14 @@ class CartController extends Controller
 
         
        
-        $stockp = DB::table('products')->where('id', $data['productId'])->first();
+        $stockp = Product::where('id', $data['productId'])->first();
 
         $stock = $stockp->stock;
 
 
         if( $stock  >= $data['quantity']){
 
-            $query = DB::table('carts')->where([
+            $query = Cart::where([
                 ['productId', '=',$data['productId'] ],
                 ['userId', '=', $data['userId']]
             ])->first();

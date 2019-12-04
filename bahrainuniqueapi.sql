@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2019 at 02:58 PM
+-- Generation Time: Dec 04, 2019 at 10:39 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.1.32
 
@@ -77,6 +77,21 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `flashsale`
+--
+
+CREATE TABLE `flashsale` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `productId` int(11) DEFAULT NULL,
+  `discount` int(111) DEFAULT NULL,
+  `startTime` time DEFAULT NULL,
+  `endTime` time DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -112,12 +127,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_details`
+-- Table structure for table `orders`
 --
 
-CREATE TABLE `order_details` (
+CREATE TABLE `orders` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `orderId` int(11) NOT NULL,
   `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `date` date DEFAULT NULL,
   `discount` int(11) NOT NULL,
@@ -132,20 +146,22 @@ CREATE TABLE `order_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `order_details`
+-- Dumping data for table `orders`
 --
 
-INSERT INTO `order_details` (`id`, `orderId`, `status`, `date`, `discount`, `customerId`, `driverId`, `subTotal`, `paymentType`, `grandTotal`, `shippingPrice`, `created_at`, `updated_at`) VALUES
-(2, 0, 'pending', NULL, 2, 1, 1, 22, 'cash-on', 22, 2, '2019-11-25 00:41:11', '2019-11-25 00:41:11'),
-(7, 77184419, 'pending', NULL, 1, 1, 1, 33, 'cashon', 1, 2, '2019-11-28 07:53:00', '2019-11-28 07:53:00');
+INSERT INTO `orders` (`id`, `status`, `date`, `discount`, `customerId`, `driverId`, `subTotal`, `paymentType`, `grandTotal`, `shippingPrice`, `created_at`, `updated_at`) VALUES
+(14, 'pending', NULL, 5, 1, 1, 22, 'cashon', 27, 10, '2019-12-02 02:39:24', '2019-12-02 02:39:24'),
+(15, 'pending', NULL, 15, 1, 1, 110, 'cashon', 125, 30, '2019-12-02 03:36:50', '2019-12-02 03:36:50'),
+(25, 'pending', NULL, 1, 1, 1, 11, 'cashon', 40, 30, '2019-12-02 04:34:16', '2019-12-02 04:34:16'),
+(26, 'pending', NULL, 3, 1, 1, 33, 'cashon', 35, 5, '2019-12-02 04:40:54', '2019-12-02 04:40:54');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_details_products`
+-- Table structure for table `order_details`
 --
 
-CREATE TABLE `order_details_products` (
+CREATE TABLE `order_details` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `userId` int(11) NOT NULL,
   `productId` int(11) NOT NULL,
@@ -158,14 +174,15 @@ CREATE TABLE `order_details_products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `order_details_products`
+-- Dumping data for table `order_details`
 --
 
-INSERT INTO `order_details_products` (`id`, `userId`, `productId`, `price`, `quantity`, `totalPrice`, `orderId`, `created_at`, `updated_at`) VALUES
-(2, 2, 2, 0, 0, 0, 3, '2019-11-25 04:48:30', '2019-11-25 04:48:30'),
-(3, 3, 2, 0, 0, 0, 3, '2019-11-25 04:48:42', '2019-11-25 04:48:42'),
-(18, 1, 3, 11, 2, 22, 77184419, NULL, NULL),
-(19, 1, 2, 11, 1, 11, 77184419, NULL, NULL);
+INSERT INTO `order_details` (`id`, `userId`, `productId`, `price`, `quantity`, `totalPrice`, `orderId`, `created_at`, `updated_at`) VALUES
+(26, 1, 3, 11, 2, 22, 14, NULL, NULL),
+(27, 1, 2, 11, 2, 22, 15, NULL, NULL),
+(28, 1, 3, 44, 2, 88, 15, NULL, NULL),
+(29, 1, 2, 11, 1, 11, 25, NULL, NULL),
+(30, 1, 2, 11, 3, 33, 26, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -229,8 +246,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `warranty`, `cost`, `statusId`, `stock`, `isNew`, `isFeatured`, `totalSale`, `color`, `size`, `created_at`, `updated_at`) VALUES
-(2, 'dell1', 'good', 22, 'go', 22, 2, 10, 0, 0, 0, '', '', '2019-11-25 00:23:09', '2019-11-25 00:23:09'),
-(3, 'nokia', 'koko', 44, 'jio', 5, 3, 1, 0, 0, 0, '', '', '2019-11-25 02:42:22', '2019-11-25 03:04:18');
+(2, 'dell1', 'good', 11, 'go', 22, 2, 6, 0, 0, 0, '', '', '2019-11-25 00:23:09', '2019-12-02 04:40:54'),
+(3, 'nokia', 'koko', 44, 'jio', 5, 3, 3, 0, 0, 0, '', '', '2019-11-25 02:42:22', '2019-11-25 03:04:18');
 
 -- --------------------------------------------------------
 
@@ -465,15 +482,15 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `order_details`
+-- Indexes for table `orders`
 --
-ALTER TABLE `order_details`
+ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `order_details_products`
+-- Indexes for table `order_details`
 --
-ALTER TABLE `order_details_products`
+ALTER TABLE `order_details`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -557,7 +574,7 @@ ALTER TABLE `wishlists`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -578,16 +595,16 @@ ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `order_details_products`
---
-ALTER TABLE `order_details_products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `photos`

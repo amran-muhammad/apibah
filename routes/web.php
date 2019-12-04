@@ -36,11 +36,11 @@ Route::post('/app/updateCart/{id}','CartController@updateCart');
 Route::post('/app/deleteCart/{id}','CartController@deleteCart');
 
 //Order details
-Route::post('/app/addOrderDetails','OrderDetailsController@addOrderDetails');
-Route::get('/app/showOrderDetails','OrderDetailsController@showOrderDetails');
-Route::get('/app/showSingleOrderDetails/{id}','OrderDetailsController@showSingleOrderDetails');
-Route::post('/app/updateOrderDetails/{id}','OrderDetailsController@updateOrderDetails');
-Route::post('/app/deleteOrderDetails/{id}','OrderDetailsController@deleteOrderDetails');
+Route::post('/app/addOrder','OrderController@addOrder');
+Route::get('/app/showOrder','OrderController@showOrder');
+Route::get('/app/showSingleOrder/{id}','OrderController@showSingleOrder');
+Route::post('/app/updateOrder/{id}','OrderController@updateOrder');
+Route::post('/app/deleteOrder/{id}','OrderController@deleteOrder');
 
 //Reservation
 
@@ -72,11 +72,11 @@ Route::post('/app/updateShipping/{id}','ShippingController@updateShipping');
 Route::post('/app/deleteShipping/{id}','ShippingController@deleteShipping');
 
 //shipping table
-Route::post('/app/addOrderDetailsProduct','OrderDetailsProductController@addOrderDetailsProduct');
-Route::get('/app/showOrderDetailsProduct','OrderDetailsProductController@showOrderDetailsProduct');
-Route::get('/app/showOrderDetailsProduct/{id}','OrderDetailsProductController@showOrderDetailsProduct');
-Route::post('/app/updateOrderDetailsProduct/{id}','OrderDetailsProductController@updateOrderDetailsProduct');
-Route::post('/app/deleteOrderDetailsProduct/{id}','OrderDetailsProductController@deleteOrderDetailsProduct');
+Route::post('/app/addOrderDetail','OrderDetailController@addOrderDetail');
+Route::get('/app/showOrderDetail','OrderDetailController@showOrderDetail');
+Route::get('/app/showOrderDetail/{id}','OrderDetailController@showOrderDetail');
+Route::post('/app/updateOrderDetail/{id}','OrderDetailController@updateOrderDetail');
+Route::post('/app/deleteOrderDetail/{id}','OrderDetailController@deleteOrderDetail');
 
 //wishlist
 Route::post('/app/addWishlist','WishlistController@addWishlist');
